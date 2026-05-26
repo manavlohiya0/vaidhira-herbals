@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaidhira Herbals - Premium 100% Organic Ayurvedic Products</title>
+  <!-- FontAwesome Icons for premium visual buttons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcement-bar">
+    <i class="fa-solid fa-leaf"></i> FREE SHIPPING ON ORDERS ABOVE ₹499! USE CODE: <strong style="color: var(--accent);">VAIDHIRA10</strong> FOR 10% OFF
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header id="main-header">
+    <div class="container header-container">
+      <!-- Brand Logo -->
+      <a href="#home" class="logo" id="brand-logo-link">
+        <img src="assets/logo.png" alt="Vaidhira Herbals Logo" id="header-logo-img">
+        <span>Vaidhira</span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav id="desktop-nav">
+        <ul>
+          <li><a href="#home" class="nav-link active" id="nav-home">Home</a></li>
+          <li><a href="#shop" class="nav-link" id="nav-shop">Shop Our Herbs</a></li>
+          <li><a href="#checkout" class="nav-link" id="nav-checkout">Checkout</a></li>
+          <li><a href="#admin" class="nav-link" id="nav-admin"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a></li>
+        </ul>
+      </nav>
+
+      <!-- Utility Actions -->
+      <div class="header-actions">
+        <!-- Search Trigger (focuses on shop search or routes to shop) -->
+        <a href="#shop" class="search-trigger" id="header-search-trigger" title="Search Products">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        
+        <!-- Cart Trigger with Badge -->
+        <button class="cart-trigger" id="header-cart-trigger" title="Open Shopping Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count" id="cart-counter">0</span>
+        </button>
+
+        <!-- Admin Shortcut -->
+        <a href="#admin" class="admin-trigger" id="header-admin-trigger" title="Admin Panel">
+          <i class="fa-solid fa-user-gear"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle Button (For mobile layout support) -->
+        <button class="mobile-menu-toggle" id="mobile-menu-btn" title="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SPA Target App Container -->
+  <main id="app">
+    <!-- Active Views (Home, Shop, Checkout, Admin) will be dynamically loaded here by app.js -->
+    <div style="display: flex; justify-content: center; align-items: center; height: 300px; color: var(--primary-light);">
+      <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 40px; margin-right: 16px;"></i>
+      <h2 style="font-family: var(--font-sans); font-weight: 500;">Loading Botanicals...</h2>
+    </div>
+  </main>
+
+  <!-- ---------------------------------------------------- -->
+  /* CART DRAWER SECTION */
+  <!-- ---------------------------------------------------- -->
+  <div class="cart-overlay" id="cart-drawer-overlay">
+    <div class="cart-drawer" id="cart-drawer">
+      <div class="cart-drawer-header">
+        <h2>Your Green Bag</h2>
+        <button class="close-cart" id="close-cart-drawer" title="Close Cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <!-- Cart Items Container -->
+      <div class="cart-drawer-body" id="cart-items-container">
+        <!-- JS rendered items appear here -->
+      </div>
+      
+      <!-- Cart Summary and Promo Code Panel -->
+      <div class="cart-drawer-footer" id="cart-footer-panel">
+        <div class="coupon-container">
+          <input type="text" id="coupon-input" placeholder="Promo code (e.g. VAIDHIRA10)" aria-label="Discount Coupon Input">
+          <button class="coupon-btn" id="apply-coupon-btn">Apply</button>
+        </div>
+        <div id="coupon-message" class="coupon-status"></div>
+
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">₹0.00</span>
+        </div>
+        <div class="cart-summary-row" id="discount-row" style="display: none; color: var(--success); font-weight: 600;">
+          <span>Promo Discount</span>
+          <span id="cart-discount">-₹0.00</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Shipping (Free above ₹499)</span>
+          <span id="cart-shipping">₹0.00</span>
+        </div>
+        <div class="cart-summary-row total">
+          <span>Grand Total</span>
+          <span id="cart-total-price">₹0.00</span>
+        </div>
+        <button class="checkout-btn" id="drawer-checkout-btn">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------------------------------------------- -->
+  /* PRODUCT DETAILS MODAL */
+  <!-- ---------------------------------------------------- -->
+  <div class="modal-overlay" id="product-detail-modal-overlay">
+    <div class="modal-content" id="product-detail-modal">
+      <button class="close-modal" id="close-detail-modal" title="Close Details">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="product-detail-grid" id="modal-product-detail-grid">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------------------------------------------- -->
+  /* ADMIN EDIT/ADD PRODUCT MODAL */
+  <!-- ---------------------------------------------------- -->
+  <div class="modal-overlay" id="admin-product-modal-overlay">
+    <div class="modal-content" style="max-width: 550px;">
+      <button class="close-modal" id="close-admin-product-modal" title="Close Form">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div style="padding: 30px;">
+        <h2 id="admin-product-modal-title" style="margin-bottom: 20px; color: var(--primary-dark);">Add New Ayurvedic Product</h2>
+        <form id="admin-product-form">
+          <input type="hidden" id="admin-product-id">
+          
+          <div class="admin-modal-grid">
+            <div class="form-group">
+              <label for="admin-p-name">Product Name *</label>
+              <input type="text" id="admin-p-name" required placeholder="e.g. Pure Neem Tulsi Soap">
+            </div>
+
+            <div class="form-group">
+              <label for="admin-p-category">Category *</label>
+              <select id="admin-p-category" required>
+                <option value="Hair Care">Hair Care</option>
+                <option value="Skin Care">Skin Care</option>
+                <option value="Body Care">Body Care</option>
+                <option value="Aromatherapy">Aromatherapy</option>
+              </select>
+            </div>
+
+            <div class="form-grid" style="margin-top: 0; padding: 0;">
+              <div class="form-group">
+                <label for="admin-p-price">Price (₹) *</label>
+                <input type="number" id="admin-p-price" min="1" required placeholder="e.g. 299">
+              </div>
+              <div class="form-group">
+                <label for="admin-p-old-price">Original Price (₹) (Optional)</label>
+                <input type="number" id="admin-p-old-price" min="1" placeholder="e.g. 399">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="admin-p-image">Product Image URL *</label>
+              <select id="admin-p-image" required>
+                <option value="assets/shampoo.png">Amla Shampoo Image (Generated)</option>
+                <option value="assets/serum.png">Tejas Glow Serum Image (Generated)</option>
+                <option value="assets/soap.png">Neem Tulsi Soap Image (Generated)</option>
+                <!-- Simple fallback visual backgrounds -->
+                <option value="custom">Provide Custom Color Block</option>
+              </select>
+              <input type="text" id="admin-p-image-custom" style="display: none; margin-top: 8px;" placeholder="Custom background color (e.g. #e8f5e9)">
+            </div>
+
+            <div class="form-grid" style="margin-top: 0; padding: 0;">
+              <div class="form-group">
+                <label for="admin-p-stock">Stock Level *</label>
+                <input type="number" id="admin-p-stock" min="0" required value="50">
+              </div>
+              <div class="form-group">
+                <label for="admin-p-badge">Badge Label</label>
+                <select id="admin-p-badge">
+                  <option value="">None</option>
+                  <option value="organic">100% Organic</option>
+                  <option value="sale">Special Sale</option>
+                  <option value="new">New Arrival</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="admin-p-desc">Product Description</label>
+              <textarea id="admin-p-desc" rows="3" placeholder="Enter key details and botanical ingredients..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;" id="admin-product-submit-btn">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------------------------------------------- -->
+  /* FOOTER SECTION */
+  <!-- ---------------------------------------------------- -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="assets/logo.png" alt="Vaidhira Logo">
+            <span>Vaidhira Herbals</span>
+          </div>
+          <p class="footer-desc">Crafting pure, organic wellness solutions inspired by ancient Ayurvedic scriptures. Bringing the power of nature's finest botanicals directly to your doorstep.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="social-btn" title="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore Shop</h4>
+          <ul>
+            <li><a href="#shop" onclick="window.setShopFilter('Hair Care')">Hair Care Products</a></li>
+            <li><a href="#shop" onclick="window.setShopFilter('Skin Care')">Skin Care Serums</a></li>
+            <li><a href="#shop" onclick="window.setShopFilter('Body Care')">Body soaps & Cleansers</a></li>
+            <li><a href="#shop" onclick="window.setShopFilter('Aromatherapy')">Aromatic Essential Oils</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Our Standards</h4>
+          <ul>
+            <li><a href="#"><i class="fa-solid fa-check text-accent" style="color: var(--accent); margin-right: 6px;"></i> Cruelty-Free</a></li>
+            <li><a href="#"><i class="fa-solid fa-check text-accent" style="color: var(--accent); margin-right: 6px;"></i> 100% Vegan Ingredients</a></li>
+            <li><a href="#"><i class="fa-solid fa-check text-accent" style="color: var(--accent); margin-right: 6px;"></i> No Paraben/Sulphates</a></li>
+            <li><a href="#"><i class="fa-solid fa-check text-accent" style="color: var(--accent); margin-right: 6px;"></i> ISO & GMP Certified</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul style="opacity: 0.8; font-size: 14px;">
+            <li><i class="fa-solid fa-location-dot" style="margin-right: 10px; color: var(--accent);"></i> Vaidhira Botanical Labs, Haridwar, Uttarakhand, India</li>
+            <li><i class="fa-solid fa-phone" style="margin-right: 10px; color: var(--accent);"></i> +91 98765 43210</li>
+            <li><i class="fa-solid fa-envelope" style="margin-right: 10px; color: var(--accent);"></i> care@vaidhiraherbals.com</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Vaidhira Herbals Pvt Ltd. All rights reserved.</p>
+        <p>Inspired by Khadi Natural & Made with <i class="fa-solid fa-heart" style="color: var(--accent);"></i> in India</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic JS -->
+  <script src="app.js"></script>
+</body>
+</html>
