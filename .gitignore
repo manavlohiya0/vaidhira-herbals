@@ -10,3 +10,6 @@ Thumbs.db
 *.njsproj
 *.sln
 *.swp
+
+# Dependencies
+node_modules/

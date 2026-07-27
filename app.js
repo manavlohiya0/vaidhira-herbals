@@ -246,8 +246,10 @@ function handleRouting() {
     const header = document.getElementById("main-header");
     if (window.scrollY > 50) {
       header.classList.add("scrolled");
+      document.body.classList.add("scrolled-active");
     } else {
       header.classList.remove("scrolled");
+      document.body.classList.remove("scrolled-active");
     }
   });
 }

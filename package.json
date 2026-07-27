@@ -1,0 +1,14 @@
+{
+  "name": "vaidhira-herbals",
+  "version": "1.0.0",
+  "description": "Premium 100% Organic Ayurvedic Products",
+  "main": "app.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}
